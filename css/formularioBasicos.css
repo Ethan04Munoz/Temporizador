@@ -1,0 +1,23 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.formulario{
+    width: 50%;
+    margin-left: 24.5%;
+    margin-top: 30px;
+    font-size: 17px;
+    padding: 20px;
+    border-radius: 25px;
+    background: #efefef;
+}
+h1{
+    text-align: center;
+}
+
+.inputTexto{
+    width: 100%;
+    height: 2rem;
+    border-radius: 4px;
+    font-size: 1.4rem;
+}
