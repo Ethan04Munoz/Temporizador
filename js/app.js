@@ -104,7 +104,10 @@ function crearDiv(temporizadorObj){
     div.appendChild(parrafoAsunto); //Añadimos los parrados como hijos al temporizador
     div.appendChild(parrafoConteo);
     div.appendChild(parrafoCancelar);
-    parrafoCancelar.addEventListener("click", eliminarDiv);
+    parrafoCancelar.addEventListener("click", function(){
+        console.log("Deletear");
+        parrafoCancelar.parentNode.remove();
+    });
     contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
     return div;
 }
@@ -113,9 +116,4 @@ function poner0sFormulario(){
     horasFaltantes.value = 0;
     minutosFaltantes.value = 0;
     segundosFaltantes.value = 0;
-}
-
-function eliminarDiv(){
-    console.log("Deletear");
-    parrafoCancelar.parentNode.remove();
 }
