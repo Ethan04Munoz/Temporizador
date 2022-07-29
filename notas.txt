@@ -1,0 +1,3 @@
+Pendiente:
+    Pese a que al presionar cancelar el div que lo contiene es eliminado y la musica no suena, en caso de volver a llamar al temporizador se ejecuta el conteo de ambos temporizadores, con lo cuál la cancelación no es efectiva del todo.
+    Mejorar el diseño para añadir ghost boton queda pendiente.

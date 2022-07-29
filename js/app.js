@@ -10,6 +10,8 @@ let segundosParrafo = document.querySelector("#segundosParrafo");
 let seleccionarAudio = document.querySelector("#seleccionarAudio");
 let notaform = document.querySelector("#notaform");
 let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
+//Declaracion de variables globales que no son elementos del DOM
+let musica = "si";
 
 //Escuchadores
 boton.addEventListener("click", iniciarTemporizador);
@@ -33,6 +35,7 @@ function iniciarTemporizador(e){//Se inicia al hacer click en el boton, obtiene 
                                 //la accion por default. Después llama a la funcion revision, que valida el formulario,
                                 //y le pasa los datos como parametros.
     e.preventDefault();
+    musica = "si";
     let mint = parseInt(minutosFaltantes.value);
     let hint = parseInt(horasFaltantes.value);
     let sint = parseInt(segundosFaltantes.value);
@@ -75,6 +78,7 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
                     temporizadorObj.sint = 59;
                 }
             }else{  //No tenemos minutos ni horas, y como los segundos ya son cero, quiere decir que se ha agotado el tiempo                
+                if(musica=="si"){ //Verificamos que no hayamos cancelado la vriable musica
                     //Creamos el nombre del audio
                     let audioname = temporizadorObj.audio + ".mp3";
                     //Mostrar en pantalla un alert y reproducir musiquita
@@ -82,6 +86,7 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
                     music.play();
                     music.loop = true;
                     return 0;
+                }
             }
         }else{  //Aun tenemos segundos, simplemente debemor restar un segundo
             temporizadorObj.sint = temporizadorObj.sint -1;
@@ -104,9 +109,11 @@ function crearDiv(temporizadorObj){
     div.appendChild(parrafoAsunto); //Añadimos los parrados como hijos al temporizador
     div.appendChild(parrafoConteo);
     div.appendChild(parrafoCancelar);
-    parrafoCancelar.addEventListener("click", function(){
+    parrafoCancelar.addEventListener("click", function(temporizadorObj){
         console.log("Deletear");
         parrafoCancelar.parentNode.remove();
+        musica = "no";
+        delete temporizadorObj.audio;
     });
     contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
     return div;
