@@ -49,7 +49,7 @@ function revision(temporizadorObj){  //Es llamada para validar los datos del for
         if (Number.isInteger(temporizadorObj.mint) && Number.isInteger(temporizadorObj.hint) && Number.isInteger(temporizadorObj.sint)){    //Revisa que todos los numeros 
                                                                                             //sean enteros y no contengan punto decimal
             let divTemporizador = crearDiv(temporizadorObj);
-            divTemporizador.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint;
+            divTemporizador.firstElementChild.nextElementSibling.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint;
             actualizarCadaSegundo(temporizadorObj, divTemporizador);       
         }else{
             alert("Por favor, solo ingresa números enteros! Así es como funciona el tiempo")
@@ -86,7 +86,7 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
         }else{  //Aun tenemos segundos, simplemente debemor restar un segundo
             temporizadorObj.sint = temporizadorObj.sint -1;
         }
-        divTemporizador.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint; //Reescribimos el tiempo faltante.
+        divTemporizador.firstElementChild.nextElementSibling.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint; //Reescribimos el tiempo faltante.
         actualizarCadaSegundo(temporizadorObj, divTemporizador); //Lamamos a la funcion nuevamente, de esta manera la funcion actualiza cada 
                                                 //segundo el tiempo faltante.
     },1000); //Determinamos la pausa del setTimeout, en este casi mil milisegundos = 1s
@@ -95,12 +95,16 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
 function crearDiv(temporizadorObj){
     let div = document.createElement('div'); //Creamos el div temporizador
     let parrafoAsunto = document.createElement("p"); //Creamos el parrafo que contendra la nota o texto
-    parrafoAsunto.innerText = temporizadorObj.texto; //Añadimos el texto al parrafo
+    parrafoAsunto.innerText = "Asunto: " + temporizadorObj.texto; //Añadimos el texto al parrafo
     let parrafoConteo = document.createElement("p"); //Creamos el parrafo donde se realizara el conteo
+    let parrafoCancelar = document.createElement("div");  //Creamos el parrafo para cancelar
+    parrafoCancelar.innerText = "Cancelar";
+    parrafoCancelar.style.color = "#E50000";
     div.classList.add("card_temporizador"); //Le damos una clase al DIV
-
     div.appendChild(parrafoAsunto); //Añadimos los parrados como hijos al temporizador
     div.appendChild(parrafoConteo);
+    div.appendChild(parrafoCancelar);
+    parrafoCancelar.addEventListener("click", eliminarDiv);
     contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
     return div;
 }
@@ -111,3 +115,7 @@ function poner0sFormulario(){
     segundosFaltantes.value = 0;
 }
 
+function eliminarDiv(){
+    console.log("Deletear");
+    parrafoCancelar.parentNode.remove();
+}

@@ -21,3 +21,17 @@ body{
     background: #0673bb;
 }
 
+.card_temporizador{
+    width: 18rem;
+    height: 18rem;
+    background: #ffffff;
+    border-radius: 2rem;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0.3rem;
+    margin-left: 2rem;
+}
+
+#contenerTemporizadores{
+    display: inline-flex;
+}
