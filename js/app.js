@@ -72,7 +72,7 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
     for (i = 0; i < temporizadoresCancelados.length; i++){
         console.log(i);
         console.log(temporizadoresCancelados[i]);
-        if (temporizadoresCancelados.i == temporizadorObj.divID){
+        if (temporizadoresCancelados[i] == temporizadorObj.divID){
             console.log(temporizadorObj.divID);
             bandera = 0;
         }
