@@ -120,7 +120,7 @@ function crearDiv(temporizadorObj){
     let parrafoConteo = document.createElement("p"); //Creamos el parrafo donde se realizara el conteo
     let parrafoCancelar = document.createElement("div");  //Creamos el parrafo para cancelar
     parrafoCancelar.innerText = "Cancelar";
-    parrafoCancelar.style.color = "#E50000";
+    parrafoCancelar.classList.add("cancelarBoton");
     div.classList.add("card_temporizador"); //Le damos una clase al DIV
     div.appendChild(parrafoAsunto); //Añadimos los parrados como hijos al temporizador
     div.appendChild(parrafoConteo);
