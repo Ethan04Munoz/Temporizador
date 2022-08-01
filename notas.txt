@@ -1,3 +1,26 @@
 Pendiente:
     X Pese a que al presionar cancelar el div que lo contiene es eliminado y la musica no suena, en caso de volver a llamar al temporizador se ejecuta el conteo de ambos temporizadores, con lo cuál la cancelación no es efectiva del todo.
-    Mejorar el diseño para añadir ghost boton queda pendiente.
+    X Mejorar el diseño para añadir ghost boton queda pendiente.
+    Creacion del div al terminar el temporizador pendiente
+
+
+
+    Comentarios eliminados: 
+            /*
+        
+        ALERTA POSIBLE SOLUCION
+        
+        Teniendo en cuenta que lo que nos muestra en consola es una mierda, quiere decir que no esta agarrando el objeto del
+        parametro en function(temporizadorObj).
+        Habría que probar si es posible llamar a una funcion externa. De esta manera, en este event listener llamar a una 
+        funcion aparte e vez de crearla ahí mismo como es actualmente.
+        Es decir, crear nueva funcion y remplazar
+            parrafoCancelar.addEventListener("click", function(temporizadorObj){cosas de funcion}
+            por
+            parrafoCancelar.addEventListener("click", nueva funcion)
+        Y esta nueva funcion que creemos en otra parte reciba el objeto.
+        Como ahora si tenemos el objeto podemos experimentar varias soluciones,
+            la escrita actualmente, añadir el ID a un array de IDs cancelados
+            otras
+        Revisar stackoverflow brave para ver como pasar parametros en event listeners
+        */ 

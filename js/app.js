@@ -10,6 +10,7 @@ let segundosParrafo = document.querySelector("#segundosParrafo");
 let seleccionarAudio = document.querySelector("#seleccionarAudio");
 let notaform = document.querySelector("#notaform");
 let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
+let bodyElement = document.querySelector("body");
 //Declaracion de variables globales que no son elementos del DOM
 let musica = "si";
 let temporizadoresCancelados = [];
@@ -93,15 +94,8 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
                         temporizadorObj.sint = 59;
                     }
                 }else{  //No tenemos minutos ni horas, y como los segundos ya son cero, quiere decir que se ha agotado el tiempo                
-                    if(musica=="si"){ //Verificamos que no hayamos cancelado la vriable musica
-                        //Creamos el nombre del audio
-                        let audioname = temporizadorObj.audio + ".mp3";
-                        //Mostrar en pantalla un alert y reproducir musiquita
-                        const music = new Audio(audioname);
-                        music.play();
-                        music.loop = true;
-                        return 0;
-                    }
+                    temporizadorFinalizado(temporizadorObj);
+                    return 0;
                 }
             }else{  //Aun tenemos segundos, simplemente debemor restar un segundo
                 temporizadorObj.sint = temporizadorObj.sint -1;
@@ -126,24 +120,6 @@ function crearDiv(temporizadorObj){
     div.appendChild(parrafoConteo);
     div.appendChild(parrafoCancelar);
     parrafoCancelar.addEventListener("click", () => eliminarTemporizador(temporizadorObj, parrafoCancelar));
-        /*
-        
-        ALERTA POSIBLE SOLUCION
-        
-        Teniendo en cuenta que lo que nos muestra en consola es una mierda, quiere decir que no esta agarrando el objeto del
-        parametro en function(temporizadorObj).
-        Habría que probar si es posible llamar a una funcion externa. De esta manera, en este event listener llamar a una 
-        funcion aparte e vez de crearla ahí mismo como es actualmente.
-        Es decir, crear nueva funcion y remplazar
-            parrafoCancelar.addEventListener("click", function(temporizadorObj){cosas de funcion}
-            por
-            parrafoCancelar.addEventListener("click", nueva funcion)
-        Y esta nueva funcion que creemos en otra parte reciba el objeto.
-        Como ahora si tenemos el objeto podemos experimentar varias soluciones,
-            la escrita actualmente, añadir el ID a un array de IDs cancelados
-            otras
-        Revisar stackoverflow brave para ver como pasar parametros en event listeners
-        */ 
     contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
     return div;
 }
@@ -159,4 +135,37 @@ function eliminarTemporizador(temporizadorObj, parrafoCancelar){
     console.log("Deletear");
     parrafoCancelar.parentNode.remove();
     temporizadoresCancelados.push(temporizadorObj.divID);
+}
+
+function temporizadorFinalizado(temporizadorObj){
+    /*
+    Creamos la estructura del DIV
+    */
+    let divContenedor = document.createElement("div");
+    let parrafoMensaje = document.createElement("p");
+    let botonDetenerMusica = document.createElement("button");
+    parrafoMensaje.textContent = temporizadorObj.texto;
+    botonDetenerMusica.textContent = "Detener";
+    botonDetenerMusica.classList.add("cancelarBoton");
+    botonDetenerMusica.classList.add("basicosBoton");
+    divContenedor.classList.add("temporizadorFinalizado");
+    //Creamos el nombre del audio
+    let audioname = temporizadorObj.audio + ".mp3";
+    //Mostrar en pantalla un alert y reproducir musiquita
+    let music = new Audio(audioname);
+    music.play();
+    music.loop = true;
+    botonDetenerMusica.addEventListener("click", () => eliminarTemporizadorFinalizado(divContenedor, music));
+    divContenedor.appendChild(parrafoMensaje);
+    divContenedor.appendChild(botonDetenerMusica);
+    contenerTemporizadores.appendChild(divContenedor);
+    return 0;
+}
+
+function eliminarTemporizadorFinalizado(divContenedor, music){
+    console.log("Eliminando recuadro...");
+    divContenedor.remove();
+    music.loop = false;
+    music.pause();
+    return 0;
 }
