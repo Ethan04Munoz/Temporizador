@@ -11,9 +11,13 @@ let seleccionarAudio = document.querySelector("#seleccionarAudio");
 let notaform = document.querySelector("#notaform");
 let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
 let bodyElement = document.querySelector("body");
+let temporizadorForm = document.querySelector("#temporizador");
 //Declaracion de variables globales que no son elementos del DOM
 let musica = "si";
 let temporizadoresCancelados = [];
+
+//setamos las clases de javascript
+bodyElement.className = "bodyNoBlur";
 
 //Escuchadores
 boton.addEventListener("click", iniciarTemporizador);
@@ -94,7 +98,10 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
                         temporizadorObj.sint = 59;
                     }
                 }else{  //No tenemos minutos ni horas, y como los segundos ya son cero, quiere decir que se ha agotado el tiempo                
+                    temporizadorForm.classList.add("blureado");
+                    bodyElement.className = "bodyBlur";
                     temporizadorFinalizado(temporizadorObj);
+                    eliminarTemporizador(temporizadorObj, divTemporizador.lastElementChild);
                     return 0;
                 }
             }else{  //Aun tenemos segundos, simplemente debemor restar un segundo
@@ -103,7 +110,7 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
             divTemporizador.firstElementChild.nextElementSibling.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint; //Reescribimos el tiempo faltante.
             actualizarCadaSegundo(temporizadorObj, divTemporizador); //Lamamos a la funcion nuevamente, de esta manera la funcion actualiza cada 
                                                     //segundo el tiempo faltante.
-        },1000); //Determinamos la pausa del setTimeout, en este casi mil milisegundos = 1s
+        },999); //Determinamos la pausa del setTimeout, en este casi mil milisegundos = 1s
     }
 }
 
@@ -141,6 +148,8 @@ function temporizadorFinalizado(temporizadorObj){
     /*
     Creamos la estructura del DIV
     */
+   //bodyElement.classList.add("blureado");
+
     let divContenedor = document.createElement("div");
     let parrafoMensaje = document.createElement("p");
     let botonDetenerMusica = document.createElement("button");
@@ -159,13 +168,35 @@ function temporizadorFinalizado(temporizadorObj){
     divContenedor.appendChild(parrafoMensaje);
     divContenedor.appendChild(botonDetenerMusica);
     contenerTemporizadores.appendChild(divContenedor);
+    let divContenedorMasMusica = {
+        divCont: divContenedor,
+        musicAudio: music
+    }
     return 0;
 }
 
-function eliminarTemporizadorFinalizado(divContenedor, music){
+function eliminarTemporizadorFinalizado(divContenedor, music){ /* 
+
+Esta funcion elimina el cuadro que muestra que el temporizador a finalizado, 
+es decir, el que aparece 
+al finalizar el conteo y detiene la musica con el boton detener
+
+*/
     console.log("Eliminando recuadro...");
     divContenedor.remove();
     music.loop = false;
     music.pause();
     return 0;
 }
+
+
+/*
+function eliminarTemporizadorVacio(){
+    let temporizadorVacio = document.querySelector(".card_temporizador"); //Agarra el deste del temporizador que cuenta lol
+    let conteo = temporizadorVacio.firstElementChild.nextElementSibling; //obtenemos el parrafo contador
+    con
+}
+
+
+
+*/

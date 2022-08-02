@@ -1,9 +1,19 @@
-body{
+.bodyNoBlur{
     background-image: url("../img/reloj.jpg");
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.bodyBlur{
+    background-image: url("../img/reloj.jpg");
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Add the blur effect */
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
 }
 
 #btnIniciar{
@@ -75,4 +85,10 @@ h2{
     width: 20%;
     margin-left: 40%;
     font-size: 1.3rem;
+}
+
+.blureado{
+     /* Add the blur effect */
+     filter: blur(4px);
+     -webkit-filter: blur(4px);
 }
