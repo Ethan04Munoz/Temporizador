@@ -1,17 +1,21 @@
 //Declaracion de variables globales, elementos del DOM
-let segundosFaltantes = document.querySelector("#segundos");
-let minutosFaltantes = document.querySelector("#minutos");
-let horasFaltantes = document.querySelector("#horas");
-let boton = document.querySelector("#btnIniciar");
-let tiempoParrafo = document.querySelector("#tiempoParrafo");
-let horasParrafo = document.querySelector("#horasParrafo");
-let minutosParrafo = document.querySelector("#minutosParrafo");
-let segundosParrafo = document.querySelector("#segundosParrafo");
-let seleccionarAudio = document.querySelector("#seleccionarAudio");
-let notaform = document.querySelector("#notaform");
-let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
-let bodyElement = document.querySelector("body");
-let temporizadorForm = document.querySelector("#temporizador");
+
+    //Los input que almacenan minutos, segundos y horas
+    let segundosFaltantes = document.querySelector("#segundos");
+    let minutosFaltantes = document.querySelector("#minutos");
+    let horasFaltantes = document.querySelector("#horas");
+
+    //El boton que envia el formulario
+    let boton = document.querySelector("#btnIniciar");
+    let tiempoParrafo = document.querySelector("#tiempoParrafo");
+    let horasParrafo = document.querySelector("#horasParrafo");
+    let minutosParrafo = document.querySelector("#minutosParrafo");
+    let segundosParrafo = document.querySelector("#segundosParrafo");
+    let seleccionarAudio = document.querySelector("#seleccionarAudio");
+    let notaform = document.querySelector("#notaform");
+    let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
+    let bodyElement = document.querySelector("body");
+    let temporizadorForm = document.querySelector("#temporizador");
 //Declaracion de variables globales que no son elementos del DOM
 let musica = "si";
 let temporizadoresCancelados = [];
@@ -131,29 +135,38 @@ function crearDiv(temporizadorObj){
     return div;
 }
 
-function poner0sFormulario(){
+function poner0sFormulario(){ 
+    /*
+    Esta funcion llena los valores del formulario con 0, es llamada con un addEventListener al inicio del codigo con el 
+    onbodyloaded
+    */
     horasFaltantes.value = 0;
     minutosFaltantes.value = 0;
-    segundosFaltantes.value = 0;
+    segundosFaltantes.value = 1;
 }
 
 function eliminarTemporizador(temporizadorObj, parrafoCancelar){
-    console.log(temporizadorObj); //No obtiene el objeto normal
+    /*
+    Esta funcion se llama desde cancelar, en el recuadro que 
+    muestra el temporizador contando, le pasamos el parrafo con 
+    el boton de cancelar y el objeto temporizador.
+
+    Usamos el parrafo para acceder a su padre, el div, y poder eliminarlo.
+    */
+    console.log(temporizadorObj);
     console.log("Deletear");
     parrafoCancelar.parentNode.remove();
     temporizadoresCancelados.push(temporizadorObj.divID);
+    /*Con la linea anterior añadimos a temporizadoresCancelados(un arreglo), el ID
+    del temporizador
+    */
 }
 
 function temporizadorFinalizado(temporizadorObj){
-    /*
-    Creamos la estructura del DIV
-    */
-   //bodyElement.classList.add("blureado");
-
     let divContenedor = document.createElement("div");
     let parrafoMensaje = document.createElement("p");
     let botonDetenerMusica = document.createElement("button");
-    parrafoMensaje.textContent = temporizadorObj.texto;
+    parrafoMensaje.textContent = "Asunto: " + temporizadorObj.texto;
     botonDetenerMusica.textContent = "Detener";
     botonDetenerMusica.classList.add("cancelarBoton");
     botonDetenerMusica.classList.add("basicosBoton");
@@ -168,35 +181,29 @@ function temporizadorFinalizado(temporizadorObj){
     divContenedor.appendChild(parrafoMensaje);
     divContenedor.appendChild(botonDetenerMusica);
     contenerTemporizadores.appendChild(divContenedor);
-    let divContenedorMasMusica = {
-        divCont: divContenedor,
-        musicAudio: music
-    }
     return 0;
 }
 
-function eliminarTemporizadorFinalizado(divContenedor, music){ /* 
+function eliminarTemporizadorFinalizado(divContenedor, music){ 
+    /* 
+        Esta funcion elimina el cuadro que muestra que el temporizador a finalizado, 
+        es decir, el que aparece al finalizar el conteo y detiene la musica con 
+        el boton detener
+    */
 
-Esta funcion elimina el cuadro que muestra que el temporizador a finalizado, 
-es decir, el que aparece 
-al finalizar el conteo y detiene la musica con el boton detener
+    //Modificamos las clases para que el fondo deje de estar borroso
+    temporizadorForm.classList.remove("blureado");
+    bodyElement.className = "bodyNoBlur";
 
-*/
+    //Usamos un console.log para hacer pruebas
     console.log("Eliminando recuadro...");
+
+    /*Eliminamos el recuadro que contiene el temporizador finalizado, 
+    es decir, el que contiene el boton detener*/
     divContenedor.remove();
+
+    //Detenemos el loop de la musica y la pausamos
     music.loop = false;
     music.pause();
     return 0;
 }
-
-
-/*
-function eliminarTemporizadorVacio(){
-    let temporizadorVacio = document.querySelector(".card_temporizador"); //Agarra el deste del temporizador que cuenta lol
-    let conteo = temporizadorVacio.firstElementChild.nextElementSibling; //obtenemos el parrafo contador
-    con
-}
-
-
-
-*/
