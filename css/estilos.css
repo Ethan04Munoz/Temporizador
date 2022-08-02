@@ -57,7 +57,7 @@ h2{
         transition: all 0.2s ease-in;
 }
 .cancelarBoton:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
     background-color: #ff5f00;
     color: #fff;
 }
@@ -69,11 +69,12 @@ h2{
     height: 50%;
     left: 25%;
     top: 25%;
-    background: #ececec;
+    background: #181818;
     border-radius: 2rem;
 }
 
 .temporizadorFinalizado p{
+    color: #ececec;
     font-size: 1.4rem;
     text-align: center;
 }

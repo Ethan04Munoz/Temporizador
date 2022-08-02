@@ -7,20 +7,28 @@
 
     //El boton que envia el formulario
     let boton = document.querySelector("#btnIniciar");
-    let tiempoParrafo = document.querySelector("#tiempoParrafo");
-    let horasParrafo = document.querySelector("#horasParrafo");
-    let minutosParrafo = document.querySelector("#minutosParrafo");
-    let segundosParrafo = document.querySelector("#segundosParrafo");
+
+    //El select de html para elegir nuestro audio
     let seleccionarAudio = document.querySelector("#seleccionarAudio");
+
+    //el input del Asunto o nota que añadimos
     let notaform = document.querySelector("#notaform");
+
+    //El div que contendrá a los temporizadores que se añadan
     let contenerTemporizadores = document.querySelector("#contenerTemporizadores");
+
+    //Agarramos al elemento body
     let bodyElement = document.querySelector("body");
+
+    //El formulario del temporizador
     let temporizadorForm = document.querySelector("#temporizador");
+
 //Declaracion de variables globales que no son elementos del DOM
 let musica = "si";
-let temporizadoresCancelados = [];
+let temporizadoresCancelados = [];  /*Lista de temporizadores donde se 
+                                    añadiran los temporizadores cancelados por ID*/
 
-//setamos las clases de javascript
+//seteamos las clases de javascript
 bodyElement.className = "bodyNoBlur";
 
 //Escuchadores
@@ -28,50 +36,123 @@ boton.addEventListener("click", iniciarTemporizador);
 document.addEventListener("DOMContentLoaded", poner0sFormulario);
 
 //Clases
-
 class Temporizador{
+    /*
+    Creamos una clase de temporizador para poder crear nuevos temporizadores como objetos
+    */
     constructor(hint, mint,sint, audioForm, recordarTexto, divID){
-        this.hint = hint;
-        this.mint = mint;
-        this.sint = sint;
-        this.audio = audioForm;
-        this.texto = recordarTexto;
-        this.divID = divID;
+        this.hint = hint;   //Hora
+        this.mint = mint;   //Minutos
+        this.sint = sint;   //Segundos
+
+        this.audio = audioForm;     //Nombre del audio, sin incluir el .mp3
+
+        this.texto = recordarTexto; //Texto de la nota (Asunto)
+
+        this.divID = divID;         /*Un DivID que será único y será generado con
+                                    Date.now()*/            
     }
 }
 
 //funciones
+function iniciarTemporizador(e){
+    /*Se inicia al hacer click en el boton, obtiene los valores del formulario y previene 
+    la accion por default. Después llama a la funcion revision, que valida el formulario,
+    y le pasa los datos como parametros.*/
 
-function iniciarTemporizador(e){//Se inicia al hacer click en el boton, obtiene los valores del formulario y previene 
-                                //la accion por default. Después llama a la funcion revision, que valida el formulario,
-                                //y le pasa los datos como parametros.
-    e.preventDefault();
+    e.preventDefault(); /*Prevenimos que se envie el formulario automaticamente (La accion por 
+                        default del boton submit)*/
     musica = "si";
+
+    //Obtenemos los valores del formulario, horas minutos y segundos y los convertimos a enteros
     let mint = parseInt(minutosFaltantes.value);
     let hint = parseInt(horasFaltantes.value);
     let sint = parseInt(segundosFaltantes.value);
+
+    //Obtenemos el audio seleccionado en el formulario a través del select
     let audioForm = seleccionarAudio.value;
+    //Obtenemos el valor del input texto donde añaden una nota los usuarios
     let textoloco = notaform.value;
-    let divID = Date.now()
+    //Creamos un divID usando Date.now
+    let divID = Date.now();
+
+    /*Creamos un nuveo temporizador usando el contructor de la clase Temporizador
+    (Ver definicion de la clase más arriba)*/
     let temporizadorObj = new Temporizador (hint, mint, sint, audioForm, textoloco, divID);
+
+    /*Llamamos a la función revision, que se encarga de validar el formulario, y le pasamos
+    el objeto que acabamos de crear*/
     revision(temporizadorObj);
 }
 
-function revision(temporizadorObj){  //Es llamada para validar los datos del formulario. Esta funcion llama a la funcion
-                                    //actualizar cada segundo, que actualiza cada segundo el temporizador
+function revision(temporizadorObj){  
+    /*Es llamada para validar los datos del formulario. Esta funcion llama a la funcion
+    actualizar cada segundo, que actualiza cada segundo el temporizador*/
+
     if (temporizadorObj.mint<60 && temporizadorObj.sint <60){ //revisa que los minutos y segundos no superen el 59
 
-        if (Number.isInteger(temporizadorObj.mint) && Number.isInteger(temporizadorObj.hint) && Number.isInteger(temporizadorObj.sint)){    //Revisa que todos los numeros 
-                                                                                            //sean enteros y no contengan punto decimal
+        if (Number.isInteger(temporizadorObj.mint) && Number.isInteger(temporizadorObj.hint) && Number.isInteger(temporizadorObj.sint)){    
+            /*Revisa que todos los numeros sean enteros y no contengan punto decimal, en cuyo caso
+            significa que todo esta correcto y procedemos al codigo para crear el temporizador*/
+
+            /*Llamamos a la función crear div, que nos retorna un div almacenado en una variable
+            dicho div contiene parrafoAsunto, parrafoConteo y parrafoCancelar, y es el div que muestra
+            el conteo y lo va actualizando.
+            Guardamos el div en divTemporizador.
+            */
             let divTemporizador = crearDiv(temporizadorObj);
+
+            /*Accedemos al hijo del divTemporizadory luego a su siguiente hermano, parrafoConteo, 
+            para añadirle el tiempo restante por primera vez*/
             divTemporizador.firstElementChild.nextElementSibling.textContent = "Tiempo faltante: " + temporizadorObj.hint + ":" + temporizadorObj.mint + ":" + temporizadorObj.sint;
+            
+            /*Llamamos a la función actualizar cada segundo y le enviamos el div que muestra el 
+            conteo y el objeto temporizador como parametros*/
             actualizarCadaSegundo(temporizadorObj, divTemporizador);       
         }else{
+            //No son números enteros
             alert("Por favor, solo ingresa números enteros! Así es como funciona el tiempo")
         }
     }else{
+        //Los minutos o segundos no son menores a 60
         alert("Por favor, ingresa un tiempo valido!!!");
     }
+}
+
+function crearDiv(temporizadorObj){
+
+    /*
+    Esta funcion crea el div que muestra el conteo regresivo, es decir, el temporizador activo.
+    Creamos al objeto y a sus parrafos hijos, los añadimos al DOM con appendChild y returnamos 
+    el div que contiene todo.
+    Además creamos un addEventListener con función de flecha, lo añadimos al boton de parrafoCancelar,
+    y es por supuesto que si se hace click en cancelar llama a la funcion eliminarTemporizador
+    */
+
+    //Creamos el div temporizador
+    let div = document.createElement('div'); 
+
+    //Creamos el parrafo que contendra la nota o texto
+    let parrafoAsunto = document.createElement("p"); 
+    //Añadimos el texto al parrafo
+    parrafoAsunto.innerText = "Asunto: " + temporizadorObj.texto; 
+
+    let parrafoConteo = document.createElement("p"); //Creamos el parrafo donde se realizara el conteo
+    let parrafoCancelar = document.createElement("div");  //Creamos el parrafo para cancelar
+    parrafoCancelar.innerText = "Cancelar";
+
+    //Le damos una clase al DIV y al boton de cancelar
+    parrafoCancelar.classList.add("cancelarBoton");
+    div.classList.add("card_temporizador"); 
+
+    //Añadimos los parrados como hijos al temporizador
+    div.appendChild(parrafoAsunto); 
+    div.appendChild(parrafoConteo);
+    div.appendChild(parrafoCancelar);
+
+    parrafoCancelar.addEventListener("click", () => eliminarTemporizador(temporizadorObj, parrafoCancelar));
+    contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
+    return div;
 }
 
 function actualizarCadaSegundo(temporizadorObj, divTemporizador){
@@ -116,23 +197,6 @@ function actualizarCadaSegundo(temporizadorObj, divTemporizador){
                                                     //segundo el tiempo faltante.
         },999); //Determinamos la pausa del setTimeout, en este casi mil milisegundos = 1s
     }
-}
-
-function crearDiv(temporizadorObj){
-    let div = document.createElement('div'); //Creamos el div temporizador
-    let parrafoAsunto = document.createElement("p"); //Creamos el parrafo que contendra la nota o texto
-    parrafoAsunto.innerText = "Asunto: " + temporizadorObj.texto; //Añadimos el texto al parrafo
-    let parrafoConteo = document.createElement("p"); //Creamos el parrafo donde se realizara el conteo
-    let parrafoCancelar = document.createElement("div");  //Creamos el parrafo para cancelar
-    parrafoCancelar.innerText = "Cancelar";
-    parrafoCancelar.classList.add("cancelarBoton");
-    div.classList.add("card_temporizador"); //Le damos una clase al DIV
-    div.appendChild(parrafoAsunto); //Añadimos los parrados como hijos al temporizador
-    div.appendChild(parrafoConteo);
-    div.appendChild(parrafoCancelar);
-    parrafoCancelar.addEventListener("click", () => eliminarTemporizador(temporizadorObj, parrafoCancelar));
-    contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
-    return div;
 }
 
 function poner0sFormulario(){ 
