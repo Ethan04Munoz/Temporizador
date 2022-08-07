@@ -21,8 +21,10 @@
 
 
 .card_temporizador{
-    width: 18rem;
-    height: 18rem;
+    width: 90%;
+    margin-right: 5%;
+    margin-top: 1.5rem;
+    height: 20rem;
     background: #ececec;
     border-radius: 2rem;
     font-size: 1.3rem;
@@ -32,7 +34,10 @@
 }
 
 #contenerTemporizadores{
-    display: inline-flex;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 19.5% 19.5% 19.5% 19.5% 19.5%;
 }
 
 h2{
