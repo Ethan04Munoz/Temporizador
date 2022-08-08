@@ -19,7 +19,6 @@
     font-size: 1.3rem;
 }
 
-
 .card_temporizador{
     width: 90%;
     margin-right: 5%;
@@ -37,10 +36,11 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 19.5% 19.5% 19.5% 19.5% 19.5%;
+    grid-template-columns: repeat(5, 19.5%);
 }
 
-h2{
+h1, h2{
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -49,7 +49,6 @@ h2{
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid;
     border-radius: 1rem;
-    padding: 5px 12px;
     display: inline-block;
     text-decoration: none;
         /* Firefox */
@@ -85,6 +84,7 @@ h2{
 }
 
 .basicosBoton{
+    text-align: center;
     width: 20%;
     margin-left: 40%;
     font-size: 1.3rem;
@@ -94,4 +94,46 @@ h2{
      /* Add the blur effect */
      filter: blur(4px);
      -webkit-filter: blur(4px);
+}
+
+@media(max-width: 992px){ /*Laptop*/
+    *{
+        font-size: 0.8rem;
+    }
+    h1{
+        font-size: 2rem;
+    }
+    .basicosBoton{
+        width: 20%;
+        margin-left: 40%;
+        font-size: 0.8rem;
+    }
+}
+
+@media(max-width: 768px){ /*Tablet*/
+    *{
+        font-size: 0.65rem;
+    }
+    h1{
+        font-size: 1.5rem;
+    }
+    .basicosBoton{
+        width: 20%;
+        margin-left: 40%;
+        font-size: 0.65rem;
+    }
+}
+
+@media(max-width: 600px){ /*Celular*/
+    *{
+        font-size: 0.45rem;
+    }
+    h1{
+        font-size: 1.2rem;
+    }
+    .basicosBoton{
+        width: 20%;
+        margin-left: 40%;
+        font-size: 0.45rem;
+    }
 }
