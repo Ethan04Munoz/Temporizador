@@ -4,7 +4,7 @@ Pendiente:
     X Creacion del div al terminar el temporizador pendiente.
     X Poner borroso el fondo cuando se muestra el temporizador finalizado.
     X Eliminar el temporizador que esta agotado al mostrar el temporizador.
-    Falta limitar la cantidad de temporizadores por linea
+    X Falta limitar la cantidad de temporizadores por linea
 
 
 
