@@ -19,17 +19,33 @@
     font-size: 1.3rem;
 }
 
+.temporizadorFinalizado{
+    z-index: 1000000;
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    background: #181818;
+    border-radius: 2rem;
+    text-align: center;
+}
+
+.temporizadorFinalizado p{
+    color: #ececec;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
 .card_temporizador{
     width: 90%;
-    margin-right: 5%;
     margin-top: 1.5rem;
     height: 20rem;
     background: #ececec;
     border-radius: 2rem;
     font-size: 1.3rem;
-    text-align: center;
     padding: 0.3rem;
-    margin-left: 2rem;
+    text-align: center;
 }
 
 #contenerTemporizadores{
@@ -45,6 +61,8 @@ h1, h2{
 }
 
 .cancelarBoton{
+    width: 40%;
+    font-size: 1.3rem;
     color: #ff5f00;
     background-color: rgba(255, 255, 255, 0);
     border: 1px solid;
@@ -66,27 +84,9 @@ h1, h2{
     color: #fff;
 }
 
-.temporizadorFinalizado{
-    z-index: 1000000;
-    position: fixed;
-    width: 50%;
-    height: 50%;
-    left: 25%;
-    top: 25%;
-    background: #181818;
-    border-radius: 2rem;
-}
-
-.temporizadorFinalizado p{
-    color: #ececec;
-    font-size: 1.4rem;
-    text-align: center;
-}
-
 .basicosBoton{
     text-align: center;
     width: 20%;
-    margin-left: 40%;
     font-size: 1.3rem;
 }
 
@@ -106,7 +106,6 @@ h1, h2{
     .basicosBoton{
         min-height: 2.5rem;
         width: 30%;
-        margin-left: 35%;
         font-size: 1.3rem;
     }
     #btnIniciar{
@@ -141,7 +140,6 @@ h1, h2{
     .basicosBoton{
         min-height: 2.5rem;
         width: 30%;
-        margin-left: 35%;
         font-size: 0.65rem;
     }
     #btnIniciar{
@@ -176,7 +174,6 @@ h1, h2{
     .basicosBoton{
         min-height: 2.5rem;
         width: 50%;
-        margin-left: 25%;
         font-size: 0.45rem;
     }
     #btnIniciar{
@@ -207,7 +204,6 @@ h1, h2{
     }
     .basicosBoton{
         width: 50%;
-        margin-left: 25%;
         font-size: 0.45rem;
     }
     #btnIniciar{
