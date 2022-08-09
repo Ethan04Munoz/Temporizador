@@ -61,7 +61,7 @@ h1, h2{
 }
 
 .cancelarBoton{
-    width: 40%;
+    width: 55%;
     font-size: 1.3rem;
     color: #ff5f00;
     background-color: rgba(255, 255, 255, 0);
@@ -114,6 +114,11 @@ h1, h2{
         margin-left: 35%;
         font-size: 1.3rem;
     }
+    .cancelarBoton{
+        min-height: 2.5rem;
+        width: 60%;
+        font-size: 1.3rem;
+    }
     .formulario{
         width: 60%;
         margin-left: 18%;
@@ -128,6 +133,9 @@ h1, h2{
     .bodyBlur{
         background-size: auto;
     }
+    .formulario p , p{
+        font-size: 1.4rem;
+    }    
 }
 
 @media(max-width: 768px){ /*Tablet*/
@@ -140,12 +148,17 @@ h1, h2{
     .basicosBoton{
         min-height: 2.5rem;
         width: 30%;
-        font-size: 0.65rem;
+        font-size: 1.3rem;
     }
     #btnIniciar{
         min-height: 3rem;
         width: 30%;
         margin-left: 35%;
+        font-size: 1.3rem;
+    }
+    .cancelarBoton{
+        min-height: 2.5rem;
+        width: 70%;
         font-size: 1.3rem;
     }
     .formulario{
@@ -162,6 +175,9 @@ h1, h2{
     .bodyBlur{
         background-size: auto;
     }
+    .formulario p , p{
+        font-size: 1.4rem;
+    }    
 }
 
 @media(max-width: 600px){ /*Celular*/
@@ -174,12 +190,17 @@ h1, h2{
     .basicosBoton{
         min-height: 2.5rem;
         width: 50%;
-        font-size: 0.45rem;
+        font-size: 1.5rem;
     }
     #btnIniciar{
         min-height: 3rem;
         width: 50%;
         margin-left: 25%;
+        font-size: 1.3rem;
+    }
+    .cancelarBoton{
+        min-height: 2.5rem;
+        width: 80%;
         font-size: 1.3rem;
     }
     .formulario{
@@ -193,28 +214,37 @@ h1, h2{
     .bodyBlur{
         background-size: auto;
     }
+    .formulario p{
+        font-size: 1.6rem;
+    }
 }
 
-@media(max-width: 400px){ /*Celular*/
+@media(max-width: 400px){ /*Celular pequeño*/
     *{
         font-size: 0.45rem;
     }
     h1{
-        font-size: 1.2rem;
+        font-size: 2rem;
     }
     .basicosBoton{
+        min-height: 2.5rem;
         width: 50%;
-        font-size: 0.45rem;
+        font-size: 2rem;
     }
     #btnIniciar{
         min-height: 3rem;
         width: 50%;
         margin-left: 25%;
+        font-size: 2rem;
+    }
+    .cancelarBoton{
+        min-height: 2.5rem;
+        width: 80%;
         font-size: 1.3rem;
     }
     .formulario{
-        width: 100%;
-        margin-left: -2%;
+        width: 98%;
+        margin-left: -3%;
         padding: 2rem;
     }
     .bodyNoBlur{
@@ -223,4 +253,8 @@ h1, h2{
     .bodyBlur{
         background-size: auto;
     }
+    .formulario p{
+        font-size: 1.7rem;
+    }
+    
 }
