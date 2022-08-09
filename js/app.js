@@ -135,22 +135,25 @@ function crearDiv(temporizadorObj){
     //Creamos el parrafo que contendra la nota o texto
     let parrafoAsunto = document.createElement("p"); 
     //Añadimos el texto al parrafo
-    parrafoAsunto.innerText = "Asunto: " + temporizadorObj.texto; 
+    parrafoAsunto.textContent = "Asunto: " + temporizadorObj.texto; 
 
     let parrafoConteo = document.createElement("p"); //Creamos el parrafo donde se realizara el conteo
-    let parrafoCancelar = document.createElement("div");  //Creamos el parrafo para cancelar
-    parrafoCancelar.innerText = "Cancelar";
+    let parrafoCancelar = document.createElement("button");  //Creamos el parrafo para cancelar
+    parrafoCancelar.textContent = "Cancelar";
 
     //Le damos una clase al DIV y al boton de cancelar
     parrafoCancelar.classList.add("cancelarBoton");
+    parrafoCancelar.classList.add("basicosBoton");
     div.classList.add("card_temporizador"); 
+
+    parrafoCancelar.addEventListener("click", () => eliminarTemporizador(temporizadorObj, parrafoCancelar));
 
     //Añadimos los parrados como hijos al temporizador
     div.appendChild(parrafoAsunto); 
     div.appendChild(parrafoConteo);
     div.appendChild(parrafoCancelar);
 
-    parrafoCancelar.addEventListener("click", () => eliminarTemporizador(temporizadorObj, parrafoCancelar));
+    
     contenerTemporizadores.appendChild(div); //Añadimos el div al contenedor de DIVS
     return div;
 }

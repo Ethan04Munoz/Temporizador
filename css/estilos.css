@@ -14,8 +14,8 @@
 }
 
 #btnIniciar{
-    width: 20%;
-    margin-left: 40%;
+    width: 25%;
+    margin-left: 37.5%;
     font-size: 1.3rem;
 }
 
@@ -104,9 +104,30 @@ h1, h2{
         font-size: 2rem;
     }
     .basicosBoton{
-        width: 20%;
-        margin-left: 40%;
-        font-size: 0.8rem;
+        min-height: 2.5rem;
+        width: 30%;
+        margin-left: 35%;
+        font-size: 1.3rem;
+    }
+    #btnIniciar{
+        min-height: 2.5rem;
+        width: 30%;
+        margin-left: 35%;
+        font-size: 1.3rem;
+    }
+    .formulario{
+        width: 60%;
+        margin-left: 18%;
+        padding: 2rem;
+    }    
+    .inputTexto{
+        width: 98%;
+    }
+    .bodyNoBlur{
+        background-size: auto;
+    }
+    .bodyBlur{
+        background-size: auto;
     }
 }
 
@@ -118,9 +139,30 @@ h1, h2{
         font-size: 1.5rem;
     }
     .basicosBoton{
-        width: 20%;
-        margin-left: 40%;
+        min-height: 2.5rem;
+        width: 30%;
+        margin-left: 35%;
         font-size: 0.65rem;
+    }
+    #btnIniciar{
+        min-height: 3rem;
+        width: 30%;
+        margin-left: 35%;
+        font-size: 1.3rem;
+    }
+    .formulario{
+        width: 70%;
+        margin-left: 12%;
+        padding: 2rem;
+    }    
+    .inputTexto{
+        width: 98%;
+    }
+    .bodyNoBlur{
+        background-size: auto;
+    }
+    .bodyBlur{
+        background-size: auto;
     }
 }
 
@@ -132,8 +174,57 @@ h1, h2{
         font-size: 1.2rem;
     }
     .basicosBoton{
-        width: 20%;
-        margin-left: 40%;
+        min-height: 2.5rem;
+        width: 50%;
+        margin-left: 25%;
         font-size: 0.45rem;
+    }
+    #btnIniciar{
+        min-height: 3rem;
+        width: 50%;
+        margin-left: 25%;
+        font-size: 1.3rem;
+    }
+    .formulario{
+        width: 80%;
+        margin-left: 7%;
+        padding: 2rem;
+    }
+    .bodyNoBlur{
+        background-size: auto;
+    }
+    .bodyBlur{
+        background-size: auto;
+    }
+}
+
+@media(max-width: 400px){ /*Celular*/
+    *{
+        font-size: 0.45rem;
+    }
+    h1{
+        font-size: 1.2rem;
+    }
+    .basicosBoton{
+        width: 50%;
+        margin-left: 25%;
+        font-size: 0.45rem;
+    }
+    #btnIniciar{
+        min-height: 3rem;
+        width: 50%;
+        margin-left: 25%;
+        font-size: 1.3rem;
+    }
+    .formulario{
+        width: 100%;
+        margin-left: -2%;
+        padding: 2rem;
+    }
+    .bodyNoBlur{
+        background-size: auto;
+    }
+    .bodyBlur{
+        background-size: auto;
     }
 }
