@@ -4,20 +4,20 @@
 
 .formulario{
     width: 40%;
-    margin-left: 30%;
+    margin-left: 28%;
     margin-top: 4rem;
     font-size: 17px;
-    padding: 20px;
+    padding: 2rem;
     border-radius: 25px;
     background:#ececec;
 }
 
-.formulario p{
+.formulario p , p{
     font-size: 1.4rem;
 }
 
 .inputTexto{
-    width: 100%;
+    width: 99%;
     height: 2rem;
     border-radius: 4px;
     font-size: 1.4rem;
